@@ -12,10 +12,7 @@
     <div class="m-2">
         <a class="h3" th:href="@{/feedback/new}">Add New Feedback</a>
     </div>
-
-    <div th:if="${message}" class="alert alert-success text-center">
-        [[${message}]]
-    </div>
+    <div th:if="${message}" class="alert alert-success text-center" th:text="${message}"></div>
 
     <div>
         <table class="table table-bordered">
@@ -33,23 +30,20 @@
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="feedback : ${listFeedback}">
-                <tr>
-                    <td>[[${feedback.id}]]</td>
-                    <td>[[${feedback.userId}]]</td>
-                    <td>[[${#dates.format(feedback.date, 'yyyy-MM-dd')}]]</td>
-                    <td>[[${feedback.rating}]]</td>
-                    <td>[[${feedback.comments}]]</td>
-                    <td>[[${feedback.experience}]]</td>
-                    <td>[[${feedback.destination}]]</td>
-                    <td>[[${feedback.improvementSuggestions}]]</td>
-
-                    <td>
-                        <a class="h4 mr-3" th:href="@{'/feedback/edit/' + ${feedback.id}}">Edit</a>
-                        <a class="h4" th:href="@{'/feedback/delete/' + ${feedback.id}}">Delete</a>
-                    </td>
-                </tr>
-            </th:block>
+            <tr th:each="feedback : ${listFeedback}">
+                <td th:text="${feedback.id}"></td>
+                <td th:text="${feedback.userId}"></td>
+                <td th:text="${#dates.format(feedback.date, 'yyyy-MM-dd')}"></td>
+                <td th:text="${feedback.rating}"></td>
+                <td th:text="${feedback.comments}"></td>
+                <td th:text="${feedback.experience}"></td>
+                <td th:text="${feedback.destination}"></td>
+                <td th:text="${feedback.improvementSuggestions}"></td>
+                <td>
+                    <a class="h4 mr-3" th:href="@{'/feedback/edit/' + ${feedback.id}}">Edit</a>
+                    <a class="h4" th:href="@{'/feedback/delete/' + ${feedback.id}}">Delete</a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

@@ -14,6 +14,7 @@ public class Feedback {
     private Integer userId;
 
     @Column(nullable=false)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @Column(nullable=false)

@@ -1,4 +1,5 @@
 package com.example.javaproject.Feedback;
+
 import com.example.javaproject.Feedback.Feedback;
 import com.example.javaproject.Feedback.FeedbackNotFoundException;
 import com.example.javaproject.Feedback.FeedbackService;
@@ -22,7 +23,7 @@ public class FeedbackController {
     public String showFeedbackList(Model model) {
         List<Feedback> listFeedback = feedbackService.listAll();
         model.addAttribute("listFeedback", listFeedback);
-        return "feedback"; // Assuming you have a Thymeleaf template named "feedback.html"
+        return "feedback"; // Assuming you have a JSP file named "feedback.jsp"
     }
 
     @GetMapping("/feedback/new")
@@ -38,14 +39,14 @@ public class FeedbackController {
         ra.addFlashAttribute("message", "Feedback has been successfully added");
         return "redirect:/feedback";
     }
+
     @GetMapping("/feedback/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
         try {
             Feedback feedback = feedbackService.get(id);
             model.addAttribute("feedback", feedback);
             model.addAttribute("pageTitle", "Edit Feedback (ID: " + id + ")");
-
-            return "feedback_form"; // Assuming there's a Thymeleaf template named "feedback_form.html" for editing feedback details
+            return "feedback_form"; // Assuming there's a JSP file named "feedback_form.jsp" for editing feedback details
         } catch (FeedbackNotFoundException e) {
             ra.addFlashAttribute("message", e.getMessage());
             return "redirect:/feedback";
