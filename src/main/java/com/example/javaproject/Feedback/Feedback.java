@@ -1,7 +1,8 @@
 package com.example.javaproject.Feedback;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name="Feedback")
@@ -15,7 +16,7 @@ public class Feedback {
 
     @Column(nullable=false)
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private LocalDate date;
 
     @Column(nullable=false)
     private Integer rating;
@@ -49,10 +50,10 @@ public class Feedback {
         // Default constructor required by JPA
     }
 
-    public Feedback(Integer userId, Date date, Integer rating, String comments, String experience,
+    public Feedback(Integer userId, LocalDate date, Integer rating, String comments, String experience,
                     String destination, String improvementSuggestions) {
         this.userId = userId;
-        this.date = date;
+        this.date = LocalDate.now();
         this.rating = rating;
         this.comments = comments;
         this.experience = experience;
@@ -77,11 +78,11 @@ public class Feedback {
         this.userId = userId;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDate getDate() {
+        return LocalDate.now();
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

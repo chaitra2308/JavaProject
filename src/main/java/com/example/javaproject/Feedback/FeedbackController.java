@@ -1,8 +1,7 @@
 package com.example.javaproject.Feedback;
 
-import com.example.javaproject.Feedback.Feedback;
-import com.example.javaproject.Feedback.FeedbackNotFoundException;
-import com.example.javaproject.Feedback.FeedbackService;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +18,8 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
+
+
     @GetMapping("/feedback")
     public String showFeedbackList(Model model) {
         List<Feedback> listFeedback = feedbackService.listAll();
@@ -28,13 +29,17 @@ public class FeedbackController {
 
     @GetMapping("/feedback/new")
     public String showNewFeedbackForm(Model model) {
-        model.addAttribute("feedback", new Feedback());
+        Feedback feedback = new Feedback();
+        feedback.setDate(LocalDate.now());
+        model.addAttribute("feedback", feedback);
         model.addAttribute("pageTitle", "Add New Feedback");
         return "feedback_form";
     }
 
     @PostMapping("/feedback/save")
     public String saveFeedback(Feedback feedback, RedirectAttributes ra){
+        feedback.setDate(LocalDate.now());
+        //feedback.setDate("2024-02-09"));
         feedbackService.save(feedback);
         ra.addFlashAttribute("message", "Feedback has been successfully added");
         return "redirect:/feedback";

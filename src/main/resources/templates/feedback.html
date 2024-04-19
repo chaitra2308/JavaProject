@@ -33,7 +33,7 @@
             <tr th:each="feedback : ${listFeedback}">
                 <td th:text="${feedback.id}"></td>
                 <td th:text="${feedback.userId}"></td>
-                <td th:text="${#dates.format(feedback.date, 'yyyy-MM-dd')}"></td>
+                <td th:text="${feedback.date}"></td>
                 <td th:text="${feedback.rating}"></td>
                 <td th:text="${feedback.comments}"></td>
                 <td th:text="${feedback.experience}"></td>
