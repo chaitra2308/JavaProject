@@ -13,6 +13,22 @@ public class FeedbackService {
     @Autowired
     private FeedbackRepository feedbackRepository;
 
+    private List<FeedBackObserver> observers = new ArrayList<>();
+
+    public void addObserver(FeedBackObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(FeedBackObserver observer) {
+        observers.remove(observer);
+    }
+
+    public void notifyObservers(Feedback feedback) {
+        for (FeedBackObserver observer : observers) {
+            observer.updateFeedback();
+        }
+    }
+
 
     public List<Feedback> listAll() {
         return (List<Feedback>) feedbackRepository.findAll();
@@ -20,6 +36,7 @@ public class FeedbackService {
 
     public void save(Feedback feedback) {
         feedbackRepository.save(feedback);
+
     }
 
     public Feedback get(Integer id) throws FeedbackNotFoundException {

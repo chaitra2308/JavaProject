@@ -1,11 +1,13 @@
 package com.example.javaproject;
-import com.example.javaproject.Feedback.FeedbackRepository;
-import com.example.javaproject.Feedback.Feedback;
+import com.example.javaproject.Feedback.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.Rollback;
 
 import java.text.ParseException;
@@ -21,10 +23,23 @@ public class FeedbackTest {
     @Autowired
     private FeedbackRepository feedbackRepo;
 
+    //@MockBean
+    //private FeedBackSystem feedBackSystem;
+
+    //private Fee
+
+    //@Autowired
+    //private LoggingObserver loggingObserver;
 
     @Test
     public void testAddNew() throws ParseException {
 
+        //feedBackSystem.addObserver(loggingObserver);
+        FeedBackSystem feedbackSystem = new FeedBackSystem();
+        LoggingObserver loggingObserver = new LoggingObserver();
+        feedbackSystem.addObserver(loggingObserver);
+        System.out.println("New Observer");
+        //System.out.println(feedBackSystem.ob)
         Feedback feedback = new Feedback();
         //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //Date date = dateFormat.parse("2023-05-09");
@@ -38,9 +53,12 @@ public class FeedbackTest {
         feedback.setImprovementSuggestions("None"); // Set improvement suggestions
 
         Feedback savedFeedback = feedbackRepo.save(feedback);
-
+        //feedBackSystem.notifyObservers(feedback);
         Assertions.assertThat(savedFeedback).isNotNull();
         Assertions.assertThat(savedFeedback.getId()).isGreaterThan(0);
+        System.out.println("Feedback is being implemented");
+        feedbackSystem.setObserver(loggingObserver);
+        //Mockito.verify(feedbackSystem).addObserver(loggingObserver);
 
     }
     @Test

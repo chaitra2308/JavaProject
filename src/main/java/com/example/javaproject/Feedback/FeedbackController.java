@@ -1,7 +1,8 @@
 package com.example.javaproject.Feedback;
 
 import java.time.LocalDate;
-
+import com.example.javaproject.Feedback.FeedBackSystem;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,20 @@ public class FeedbackController {
 
     @Autowired
     private FeedbackService feedbackService;
+
+    @Autowired
+    private FeedBackSystem feedBackSystem;
+
+    @Autowired
+    private LoggingObserver loggingObserver;
+
+    @PostConstruct
+    public void init() {
+        feedbackService.addObserver(loggingObserver);
+    }
+
+    //@Autowired
+    //private FeedbackSystem feedbackSystem;
 
 
 
@@ -39,8 +54,12 @@ public class FeedbackController {
     @PostMapping("/feedback/save")
     public String saveFeedback(Feedback feedback, RedirectAttributes ra){
         feedback.setDate(LocalDate.now());
-        //feedback.setDate("2024-02-09"));
-        feedbackService.save(feedback);
+        FeedBackSystem feedbackSystem = new FeedBackSystem();
+        LoggingObserver loggingObserver = new LoggingObserver();
+        feedbackSystem.addObserver(loggingObserver);
+        System.out.println("New Observer");
+        feedbackSystem.setObserver(loggingObserver);
+        feedbackService.notifyObservers(feedback);
         ra.addFlashAttribute("message", "Feedback has been successfully added");
         return "redirect:/feedback";
     }
