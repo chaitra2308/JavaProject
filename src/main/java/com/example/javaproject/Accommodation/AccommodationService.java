@@ -36,3 +36,4 @@ public class AccommodationService {
         accommodationRepository.deleteById(id);
     }
 }
+
