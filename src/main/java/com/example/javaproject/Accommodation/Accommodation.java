@@ -1,54 +1,50 @@
 package com.example.javaproject.Accommodation;
 
+import com.example.javaproject.Transport.Transport;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Accommodation")
+@Table(name = "Accommodation")
 public class Accommodation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable=false)
-    private String name;
-
-    @Column(nullable=false)
-    private String location;
-
-    @Column(nullable=false)
-    private Double price;
-
-    @Column(nullable=false)
-    private Integer capacity;
-
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String amenities;
 
-    @Override
-    public String toString() {
-        return "Accommodation{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                ", price=" + price +
-                ", capacity=" + capacity +
-                ", amenities='" + amenities + '\'' +
-                '}';
-    }
+    @Column(nullable = false)
+    private Integer capacity;
+
+    @Column(nullable = false)
+    private String location;
+
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private Double price;
+
+    @Column(nullable = false)
+    private Integer destinationId; // Changed to destinationId to follow Java naming conventions
+
+    @OneToOne(mappedBy = "accommodation", cascade = CascadeType.ALL)
+    private Transport transport;
+
+    // Constructors, getters, and setters
 
     public Accommodation() {
         // Default constructor required by JPA
     }
 
-    public Accommodation(String name, String location, Double price, Integer capacity, String amenities) {
-        this.name = name;
-        this.location = location;
-        this.price = price;
-        this.capacity = capacity;
+    public Accommodation(String amenities, Integer capacity, String location, String name, Double price) {
         this.amenities = amenities;
+        this.capacity = capacity;
+        this.location = location;
+        this.name = name;
+        this.price = price;
     }
 
-    // Getters and setters
     public Integer getId() {
         return id;
     }
@@ -57,28 +53,12 @@ public class Accommodation {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAmenities() {
+        return amenities;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setAmenities(String amenities) {
+        this.amenities = amenities;
     }
 
     public Integer getCapacity() {
@@ -89,11 +69,43 @@ public class Accommodation {
         this.capacity = capacity;
     }
 
-    public String getAmenities() {
-        return amenities;
+    public String getLocation() {
+        return location;
     }
 
-    public void setAmenities(String amenities) {
-        this.amenities = amenities;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Integer getDestinationId() {
+        return destinationId;
+    }
+
+    public void setDestinationId(Integer destinationId) {
+        this.destinationId = destinationId;
+    }
+
+    public Transport getTransport() {
+        return transport;
+    }
+
+    public void setTransport(Transport transport) {
+        this.transport = transport;
     }
 }
