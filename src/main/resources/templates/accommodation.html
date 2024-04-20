@@ -18,23 +18,26 @@
         [[${message}]]
     </div>
 
+
     <div>
         <table class="table table-bordered">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
+                <th>Destination_ID</th>
                 <th>Name</th>
                 <th>Location</th>
                 <th>Price</th>
                 <th>Capacity</th>
                 <th>Amenities</th>
-                <th></th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <th:block th:each="accommodation : ${listAccommodation}">
+            <th:block th:each="accommodation : ${listAccommodation}" th:if="${accommodation.destinationId == 3}">
                 <tr>
                     <td>[[${accommodation.id}]]</td>
+                    <td>[[${accommodation.destinationId}]] </td>
                     <td>[[${accommodation.name}]]</td>
                     <td>[[${accommodation.location}]]</td>
                     <td>[[${accommodation.price}]]</td>
@@ -42,8 +45,9 @@
                     <td>[[${accommodation.amenities}]]</td>
 
                     <td>
-                        <a class="h4 mr-3" th:href="@{'/accommodation/edit/' + ${accommodation.id}}">Edit</a>
-                        <a class="h4" th:href="@{'/accommodation/delete/' + ${accommodation.id}}">Delete</a>
+                        <!-- Button to redirect to Transport page -->
+                        <a class="btn btn-success" th:href="@{'/transport?id=' + ${accommodation.id}}">Select</a>
+
                     </td>
                 </tr>
             </th:block>
