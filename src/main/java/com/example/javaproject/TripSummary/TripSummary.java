@@ -15,6 +15,9 @@ public class TripSummary {
     private Integer userId;
 
     @Column(nullable=false)
+    private Integer destId;
+
+    @Column(nullable=false)
     @Temporal(TemporalType.DATE) // Map to DATE type in MySQL
     private Date tripDate;
 
@@ -49,7 +52,7 @@ public class TripSummary {
 
     // Constructors, getters, and setters
     public TripSummary() {
-        // Default constructor required by JPA
+
     }
 
     public TripSummary(Integer userId, Date tripDate, String destination, Integer duration,
@@ -77,6 +80,14 @@ public class TripSummary {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Integer getDestId() {
+        return destId;
+    }
+
+    public void setDestId(Integer id) {
+        this.id = destId;
     }
 
     public Date getTripDate() {
