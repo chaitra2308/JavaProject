@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+</head>
+<body>
+<h1>Payments</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Amount</th>
+        <th>Payment Method</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="payment : ${payments}">
+        <tr>
+            <td th:text="${payment.id}"></td>
+            <td th:text="${payment.amount}"></td>
+            <td th:text="${payment.paymentMethod}"></td>
+            <td><a th:href="@{'/payments/edit/' + ${payment.id}}">Edit</a></td>
+            <td><a th:href="@{'/payments/delete/' + ${payment.id}}">Delete</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+<br>
+<a href="/payments/new">Add New Payment</a>
+</body>
+</html>
