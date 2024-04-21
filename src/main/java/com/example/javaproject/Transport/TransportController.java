@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -65,9 +66,12 @@ public class TransportController {
         }
     }
 
-    @GetMapping("/tripSummary/transport")
-    public String redirectToTripSummary(@RequestParam("id") Integer transportId) {
-        // Assuming the tripSummary.html Thymeleaf template exists and accepts transport ID as a parameter
-        return "redirect:/tripSummary/transport?id=" + transportId;
+    @PostMapping("/tripSummary/transport")
+    public String redirectToTripSummary(@RequestParam("selectedTransports") List<Integer> selectedTransports, RedirectAttributes ra) {
+        // Perform any necessary processing with the selected transport IDs here
+
+        // Redirect to the trip summary page with the selected transport IDs
+        String transportIds = String.join(",", selectedTransports.stream().map(String::valueOf).toArray(String[]::new));
+        return "redirect:/tripSummary/transport?id=" + transportIds;
     }
 }

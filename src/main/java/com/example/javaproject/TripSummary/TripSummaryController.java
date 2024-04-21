@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -80,5 +81,13 @@ public class TripSummaryController {
         }
         return "redirect:/tripSummary";
     }
+
+    @PostMapping("/tripSummary")
+    public String processSelectedTransports(@RequestParam("selectedTransports") List<Integer> selectedTransports, RedirectAttributes ra) {
+        // Process the selected transport IDs here
+        // For example, you can save them to the database or perform any other necessary operations
+        return "redirect:/tripSummary";
+    }
+
 
 }
