@@ -17,13 +17,13 @@ public interface TripSummaryRepository extends CrudRepository<TripSummary, Integ
 
     @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.touristSpots WHERE ts.destId = 0")
     List<TripSummary> findAllWithTouristSpots();*/
-    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.accommodations")
+    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.accommodations WHERE ts.destId = 3")
     List<TripSummary> findAllWithAccommodations();
 
-    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.modeOfTransport")
+    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.modeOfTransport WHERE ts.destId = 3")
     List<TripSummary> findAllWithModeOfTransport();
 
-    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.touristSpots")
+    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.touristSpots WHERE ts.destId = 3")
     List<TripSummary> findAllWithTouristSpots();
 
 
