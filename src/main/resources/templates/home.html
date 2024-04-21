@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px #3574dc;
+        }
+
+        .button:hover {background-color: #45a049;}
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 2px #3574dc;
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body>
+<!-- Your HTML content here -->
+<h1>Welcome to the Home Page</h1>
+<!-- Add your buttons for redirection here -->
+<div class="container">
+    <form action="/feedback" method="get">
+        <button type="submit" class="button">Feedback</button>
+    </form>
+    <form action="/tripSummary" method="get">
+        <button type="submit" class="button">Trip Summary</button>
+    </form>
+    <form action="/destination" method="get">
+        <button type="submit" class="button">Destination</button>
+    </form>
+</div>
+</body>
+</html>
