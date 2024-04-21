@@ -10,31 +10,36 @@
 <div class="container-fluid text-center">
     <div><h2>View Tourist Spots</h2></div>
     <div>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Details</th>
-                <th>View Tourist Spots</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="destination : ${listDestination}">
-                <td th:text="${destination.id}"></td>
-                <td th:text="${destination.destName}"></td>
-                <td th:text="${destination.text}"></td>
-                <td>
-                    <a th:href="@{'/touristspots?id=' + ${destination.id}}">View Tourist Spots</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <form th:action="@{/accomodation(destId=${destinationId})}" method="post">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Select</th>
+                    <th>Dest Id</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Text</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="touristspots : ${touristspotsList}">
+                    <td>
+                        <input type="checkbox" name="selectedTouristSpots" th:value="${touristspots.id}">
+                    </td>
+                    <td th:text="${touristspots.destId}"></td>
+                    <td th:text="${touristspots.id}"></td>
+                    <td th:text="${touristspots.name}"></td>
+                    <td th:text="${touristspots.text}"></td>
+                    <td th:text="${touristspots.rating}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="hidden" name="destId" th:value="${destinationId}">
+            <button type="submit" class="btn btn-primary">Next</button>
+        </form>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
-
-

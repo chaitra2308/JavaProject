@@ -24,5 +24,8 @@ public class TouristspotsService {
                 .withMessage("Touristspot not found for id: " + id)
                 .build();
     }
+    public List<Touristspots> findByDestId(Integer destId) {
+        return touristspotsRepository.findByDestId(destId);
+    }
 }
 

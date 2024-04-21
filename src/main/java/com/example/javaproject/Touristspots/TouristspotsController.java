@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -17,10 +18,10 @@ public class TouristspotsController {
     private TouristspotsService touristspotsService;
 
     @GetMapping("/touristspots")
-    public String showTouristspotsList(Model model) {
-        List<Touristspots> touristspotsList = touristspotsService.listAll();
+    public String showTouristspotsList(@RequestParam("id") Integer destId, Model model) {
+        List<Touristspots> touristspotsList = touristspotsService.findByDestId(destId);
         model.addAttribute("touristspotsList", touristspotsList);
-        return "touristspots"; // Assuming you have a JSP file named "touristspots.jsp"
+        return "touristspots";
     }
 
     @GetMapping("/touristspots/{id}")

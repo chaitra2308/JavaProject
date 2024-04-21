@@ -1,6 +1,5 @@
 package com.example.javaproject.Destination;
 
-import com.example.javaproject.Destination.Destination.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

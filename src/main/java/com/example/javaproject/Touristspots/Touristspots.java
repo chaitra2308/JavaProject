@@ -1,14 +1,21 @@
 package com.example.javaproject.Touristspots;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Touristspots {
+    @Id
     private Integer id;
     private Integer destId;
     private String name;
     private String text;
     private int rating;
+
+    public Touristspots() {
+    }
 
     private Touristspots(Builder builder) {
         this.id = builder.id;
