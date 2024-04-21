@@ -8,6 +8,15 @@ import java.util.List;
 
 public interface TripSummaryRepository extends CrudRepository<TripSummary, Integer>{
     public Long countById(Integer id);
+    /*
+    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.accommodations WHERE ts.destId = 0")
+    List<TripSummary> findAllWithAccommodations();
+
+    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.modeOfTransport WHERE ts.destId = 0")
+    List<TripSummary> findAllWithModeOfTransport();
+
+    @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.touristSpots WHERE ts.destId = 0")
+    List<TripSummary> findAllWithTouristSpots();*/
     @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.accommodations")
     List<TripSummary> findAllWithAccommodations();
 
@@ -16,6 +25,7 @@ public interface TripSummaryRepository extends CrudRepository<TripSummary, Integ
 
     @Query("SELECT ts FROM TripSummary ts LEFT JOIN FETCH ts.touristSpots")
     List<TripSummary> findAllWithTouristSpots();
+
 
 }
 
