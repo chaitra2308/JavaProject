@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class AccommodationController {
@@ -47,4 +50,13 @@ public class AccommodationController {
     public String deleteAccommodation(@PathVariable("id") Integer id, RedirectAttributes ra) {
         return accommodationTemplate.deleteAccommodation(id, ra);
     }
+
+    @PostMapping("/accommodation/select")
+    public String selectAccommodations(@RequestParam("selectedAccommodations") List<Integer> selectedAccommodations, RedirectAttributes ra) {
+        // Redirect to the transport page with selected accommodation IDs
+        String accommodationIds = String.join(",", selectedAccommodations.stream().map(String::valueOf).toArray(String[]::new));
+        return "redirect:/transport?accommodationIds=" + accommodationIds;
+    }
+
+
 }
