@@ -21,6 +21,7 @@ public class TouristspotsController {
     public String showTouristspotsList(@RequestParam("id") Integer destId, Model model) {
         List<Touristspots> touristspotsList = touristspotsService.findByDestId(destId);
         model.addAttribute("touristspotsList", touristspotsList);
+        model.addAttribute("destId", destId);
         return "touristspots";
     }
 
@@ -39,6 +40,14 @@ public class TouristspotsController {
     @PostMapping("/touristspots/{id}/next")
     public String goToAnotherPage(@PathVariable("id") Integer id, RedirectAttributes ra) {
         ra.addFlashAttribute("message", "Redirected to another page");
-        return "redirect:/anotherpage";
+        return "redirect:/accommodation";
+    }
+    @PostMapping("/accommodation")
+    public String processAccommodationSelection(@RequestParam("selectedTouristSpots") List<Long> selectedTouristSpots,
+                                                @RequestParam("destId") Long destId) {
+        // Process the selected tourist spots and destination ID
+        // Example: Save the selected tourist spots for the given destination
+
+        return "redirect:/accommodation"; // Redirect to the next page after processing
     }
 }
